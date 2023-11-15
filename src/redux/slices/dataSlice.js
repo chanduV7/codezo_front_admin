@@ -143,10 +143,10 @@ export const getAllJobs = createAsyncThunk("getAllJObs", async (args) => {
   const { data } = await axios.get(baseUrl + "/jobs/getAll");
   return data;
 });
-export const deleteJob = createAsyncThunk("deleteJob", async ({ jobId }) => {
+export const deleteJob = createAsyncThunk("deleteJob", async ({ jobId,cid }) => {
   console.log(jobId);
   const token = localStorage.getItem("token");
-  const { data } = await axios.delete(baseUrl + "/jobs/delete/" + jobId, {
+  const { data } = await axios.delete(baseUrl + `/jobs/delete/${jobId}/${cid}` , {
     headers: {
       Authorization: "Bearer " + token,
     },

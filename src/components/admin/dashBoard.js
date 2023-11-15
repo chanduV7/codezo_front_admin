@@ -106,8 +106,9 @@ export default function DashBoard() {
     window.alert("success");
     setModal2(false);
   };
-  const handleClick8 = (id) => {
-    dispatch(deleteJob({ jobId: id }));
+  const handleClick8 = (args) => {
+    const {jobId, cid} = args;
+    dispatch(deleteJob({ jobId: jobId, cid : cid }));
     window.location.reload();
     // setOpen123({ ...open123, open1: false, open2: true, open3: false })
   };
@@ -132,7 +133,7 @@ export default function DashBoard() {
 console.log(compNames);
 console.log(formData1);
   useEffect(() => {
-    setCompNames(companyData.map((e) => e.company_name + " " + e._id));
+    setCompNames(companyData.map((e) => e.company_name + "$" + e._id));
   }, [companyData]);
   return (
     <div className="dashboard-container">
@@ -202,14 +203,14 @@ console.log(formData1);
         <div
           className={open123.open2 ? "display-part" : "display-part-disable"}
         >
-          {jobData &&
+         0 {jobData &&
             jobData.map((e) => {
               return (
                 <div className="">
                   <Card>
                     <div className="delete">
                       {" "}
-                      <button onClick={() => handleClick8(e._id)} type="button">
+                      <button onClick={() => handleClick8({jobId : e._id, cid : e.cid})} type="button">
                         X
                       </button>
                     </div>
@@ -220,7 +221,7 @@ console.log(formData1);
                           <Label className="h6" style={{ fontWeight: "500" }}>
                             Company Name :
                           </Label>
-                          {e.company_name}
+                          {e.company_name.split("$")[0]}
                         </div>
                         <div>
                           <Label className="h6">Role</Label>
@@ -416,14 +417,14 @@ console.log(formData1);
                     id="exampleSelect"
                     name="select"
                     type="select"
-                    onChange={(q) => setFormData1({ ...formData1, cid : q.target.value.split(" ")[1], company_name: q.target.value.split(" ")[0]})}
+                    onChange={(q) => setFormData1({ ...formData1, cid : q.target.value.split("$")[1], company_name: q.target.value.split("$")[0]})}
                   >
                     <option >select</option>
                     {compNames &&
                       compNames.map((i) => {
                         return (
                           <option value={i}>
-                            {i.split(" ")[0]}
+                            {i.split("$")[0]}
                           </option>
                         );
                       })}

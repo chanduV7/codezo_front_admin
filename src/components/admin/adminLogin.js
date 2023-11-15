@@ -18,7 +18,7 @@ export default function AdminLogin() {
   };
   useEffect(() => {
     if(token && access){
-      navigate("/admin/dashboard")
+      navigate("/animation")
       
     }
     

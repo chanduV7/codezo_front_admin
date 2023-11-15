@@ -7,12 +7,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BuildProfile from './components/buildProfile';
 import ProfileForm from './components/profileForm';
 import UploadPic from './components/uploadPic';
+import Start from './components/start';
+import Animation from './components/animation';
 
 
 
 function App() {
    const router = createBrowserRouter([
-   
+   {
+    path:"/",
+    element: <Start/>
+   },
+   {
+    path: "/animation",
+    element: <Animation/>
+   },
   
     { 
       path:"/profile=/:userId",
